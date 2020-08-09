@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="col-9">
+
+    <br><br>
+    <table class="table table-striped">
+        <thead>
+          <tr>
+            <th scope="col">Project</th>
+            <th scope="col">Start</th>
+            <th scope="col">End</th>
+          </tr>
+        </thead>
+        <tbody>
+{% for time in times %}
+<tr>
+    <td>{{time.task}}</td>
+    <td>{{time.start_time}}</td>
+    <td>{{time.end_time}}</td>
+  </tr>
+{% endfor %}
+</tbody>
+</table>
+</div>
+{% endblock %}  
+
+
+
+    

@@ -10,7 +10,7 @@
             <div class="col-xl-11 col-lg-8">
                 <form action="{% url 'record_time' %}" method="post" class="card shadow bg-white rounded pb-0">
                     {% csrf_token %}
-                    <div class="row"">
+                    <div class="row">
                         <div class="col-3" style="padding-top: 15px;">
                             <select name="task" style="background:transparent;" class="form-control border-0" id="task">
                                 {% for task in tasks %}

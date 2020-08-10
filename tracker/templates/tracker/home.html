@@ -1,95 +1,48 @@
 {% extends 'base.html' %}
-
 {% block content %}
-
 {% load static %}
 <script src="{% static 'js/upcounter.js' %}"></script> 
-
-
 <div class="col-9">
-
-
-<br><br>
-
-<div class="container text-center">
-    <div class="row justify-content-center">
-    <div class="col-xl-11 col-lg-8">
-
-
-        <form action="{% url 'record_time' %}" method="post" class="card shadow bg-white rounded pb-0">
-
-            {% csrf_token %}
-
-    <div class="row" style="padding-right: 15px;">
-        <div class="col-6" style="padding-top: 15px;">
-            <select name="task" style="background:transparent;" class="form-control border-0">
-                {% for task in tasks %}
-                    <option id="{{ task.id }}" value="{{task.id}}">{{ task.name }}</option>
-                {% endfor %}
-                </select>
+    <br><br>
+    <div class="container text-center">
+        <br>{{error}}<br>
+        <div class="row justify-content-center">
+            <div class="col-xl-11 col-lg-8">
+                <form action="{% url 'record_time' %}" method="post" class="card shadow bg-white rounded pb-0">
+                    {% csrf_token %}
+                    <div class="row"">
+                        <div class="col-3" style="padding-top: 15px;">
+                            <select name="task" style="background:transparent;" class="form-control border-0" id="task">
+                                {% for task in tasks %}
+                                <option id="{{ task.id }}" value="{{task.id}}">{{ task.name }}</option>
+                                {% endfor %}
+                            </select>
+                            <span class="forTask" type="hidden" id="taskshow" name="taskshow"></span>
+                        </div>
+                        <div class="col-4" style="padding-top: 15px;">
+                            <input type="text" id="description"  name="description" placeholder="Task" style="background:transparent;" class="form-control border-5">
+                        </div>
+                        <div class="col-2" style="padding-top: 15px;">
+                            <p id="timer" class="form-control border-0" style="background:transparent;">0h 0m 0s</p>
+                        </div>
+                        <div class="col-2" style="padding-top: 15px;">
+                            <input style="display: none;" name="end_time_value" id="end_time_value" type="submit" value="end time" onclick="
+                                this.form.end_time.value = Date.now(); upcounter(false, '');
+                                " class="btn btn-danger" style="width: 100%;">
+                            <input  name="start_time_value" id="start_time_value" type="button" value="start time" onclick="
+                                this.form.start_time.value = Date.now(); upcounter(true, '');
+                                " class="btn btn-success" style="width: 100%;">
+                            <input type="hidden" id="start_time" name="start_time" value="abc">  
+                            <input type="hidden" id="end_time" name="end_time"  value="abc">
+                        </div>
+                    </div>
+                </form>
             </div>
-            
-
-            <div class="col-3" style="padding-top: 15px;">
-
-                <p id="timer" class="form-control border-0" style="background:transparent;">0h 0m 0s</p>
-            </div>
-
-
-
-            
-            <div class="col-3" style="padding-top: 15px;">
-            <input style="display: none;" name="end_time_value" id="end_time_value" type="submit" value="end time" onclick="
-              this.form.end_time.value = Date.now(); upcounter(false);
-            " class="btn btn-danger" style="width: 100%;">
-        
-            <input  name="start_time_value" id="start_time_value" type="button" value="start time" onclick="
-              this.form.start_time.value = Date.now(); upcounter(true);
-        
-            
-        " class="btn btn-success" style="width: 100%;">
-        <input type="hidden" id="start_time" name="start_time" value="abc">  
-              
-            <input type="hidden" id="end_time" name="end_time"  value="abc"></div>
+            <br>    
+            {% for time in times %}
+            <p>{{time.description}} - {{time.task}} - <span style="color: green;">{{time.start_time|date:"j M"}} {{time.start_time|time:"H:i A"}}</span> to <span style="color: red;">{{time.end_time|date:"j M"}} {{time.end_time|time:"H:i A"}}</span></p> <br><br>
+            {% endfor %}
         </div>
-        </form>
-
-
-
     </div>
-
-
-  
-
-
-
-
-
-
-
-
-
-
-
-    <br>    
-    {% for time in times %}
-        {{time.task}} - {{time.start_time}} to {{time.end_time}} <br>
-    {% endfor %}
-
-
-
-
-
-
-
-
-
-
-
-
-
-</div>    
-</div>
-
 </div>
 {% endblock %}

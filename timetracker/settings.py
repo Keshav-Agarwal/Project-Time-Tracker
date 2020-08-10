@@ -17,7 +17,6 @@ import dj_database_url
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve(strict=True).parent.parent
 
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
@@ -84,8 +83,8 @@ WSGI_APPLICATION = 'timetracker.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'trackerdb',
-        'USER': 'trackerdb',
+        'NAME': 'dbtracker',
+        'USER': 'dbtracker',
         'PASSWORD': 'keshav',
         'HOST': 'localhost',
         'PORT': '',
@@ -130,10 +129,10 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, "static"),
+    os.path.join(BASE_DIR, "tracker/static"),
 )
 
-STATIC_URL = '/static/'
+STATIC_URL = '/tracker/static/'
 
 LOGIN_REDIRECT_URL = '/'
 

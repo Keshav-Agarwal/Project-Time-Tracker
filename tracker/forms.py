@@ -9,18 +9,10 @@ class TaskForm(ModelForm):
         model = Tasks
         exclude = ['started']
 
-
-
-
-
-
-
 class TimeEntryForm(ModelForm):
     class Meta:
         model = TimeEntry
         fields = '__all__'
-
-
 
 
 class RegisterForm(UserCreationForm):

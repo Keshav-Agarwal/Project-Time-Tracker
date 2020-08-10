@@ -7,8 +7,6 @@ from django.contrib.auth.models import User
 class Tasks(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     name = models.CharField(max_length=50)
-    description = models.CharField(max_length=200, default="-") 
-    started = models.BooleanField(default=False)
 
     def __str__(self):
         return self.name
@@ -16,6 +14,7 @@ class Tasks(models.Model):
 
 class TimeEntry(models.Model):
     task = models.ForeignKey(Tasks, on_delete=models.CASCADE)
+    description = models.TextField(max_length=100, default="-")
     start_time = models.DateTimeField(auto_now=False, auto_now_add=False)
     end_time = models.DateTimeField(auto_now=False, auto_now_add=False)
 
